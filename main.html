@@ -1,45 +1,38 @@
 
-<!DOCTYPE html>
+function secondHighest(arr) {
+    // Handle empty or single-element arrays
+    if (arr.length <= 1) {
+        return -Infinity;
+    }
 
-<html>
+    // Handle arrays where all elements are the same
+    let allSame = true;
 
-<head>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <script>
-        function secondHighest(arr) {
-            let highest = -Infinity;
-            let second = -Infinity;
-
-            for (let i = 0; i < arr.length; i++) {
-                let num = Number(arr[i]);
-
-                if (num > highest) {
-                    second = highest;
-                    highest = num;
-                } else if (num < highest && num > second) {
-                    second = num;
-                }
-            }
-
-            return second;
+    for (let i = 1; i < arr.length; i++) {
+        if (Number(arr[i]) !== Number(arr[0])) {
+            allSame = false;
+            break;
         }
+    }
 
-        function Main() {
-            var n = prompt("Enter the number of elements");
-            var arr = [];
-            for (var i = 0; i < n; i++) {
-                arr[i] = prompt("Enter element " + (i+1));
-            }
-            alert(secondHighest(arr));
+    if (allSame) {
+        return -Infinity;
+    }
+
+    // Find the second-highest distinct element
+    let highest = -Infinity;
+    let second = -Infinity;
+
+    for (let i = 0; i < arr.length; i++) {
+        let num = Number(arr[i]);
+
+        if (num > highest) {
+            second = highest;
+            highest = num;
+        } else if (num < highest && num > second) {
+            second = num;
         }
-        Main();
-    </script>
+    }
 
-    <script type="text/javascript" src="./script.js"></script>
-
-</body>
-
-</html>
+    return second;
+}
